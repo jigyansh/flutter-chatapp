@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "45131571171",
+    "firebase_url": "https://chatapptutorial-3be7c.firebaseio.com",
+    "project_id": "chatapptutorial-3be7c",
+    "storage_bucket": "chatapptutorial-3be7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45131571171:android:94b6f2133aa55e3166cad6",
+        "android_client_info": {
+          "package_name": "com.example.FP"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45131571171-7u75gq66thf18kv6b3e38njvdcvmlp5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnI3zDl3rJSU8fKNCoBeLhmQeslO9nCCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45131571171-7u75gq66thf18kv6b3e38njvdcvmlp5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
