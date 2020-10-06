@@ -1,7 +1,10 @@
+import 'package:FP/helper/constants.dart';
 import 'package:FP/services/database.dart';
 import 'package:FP/widgets/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'conversation_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -21,22 +24,71 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  // createChatroomAndStartConversation(String userName) {
-  //   List<String> users = [
-  //     userName,
-  //   ];
-  //   databaseMethods.createChatRoom(chatRoomId, chatRoomMap);
-  // }
+  createChatroomAndStartConversation(String userName) {
+    // print("${Constants.myName}");
+    if (userName != Constants.myName) {
+      String chatroomId = getChatRommId(userName, Constants.myName);
+      List<String> users = [userName, Constants.myName];
+
+      Map<String, dynamic> chatRoomMap = {
+        "users": users,
+        "chatroomId": chatroomId
+      };
+
+      databaseMethods.createChatRoom(chatroomId, chatRoomMap);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ConversationScreen()));
+    } else {
+      print("you canot send msg to urself");
+    }
+  }
 
   Widget searchList() {
+    // DatabaseMethods databaseMethods = new DatabaseMethods();
     return searchSnapshot != null
         ? ListView.builder(
             shrinkWrap: true,
             itemCount: searchSnapshot.documents.length,
             itemBuilder: (context, index) {
-              return SearchTile(
-                  userName: searchSnapshot.documents[index].data["name"],
-                  userEmail: searchSnapshot.documents[index].data["email"]);
+              // userName: searchSnapshot.documents[index].data["name"],
+              // userEmail: searchSnapshot.documents[index].data["email"]
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          searchSnapshot.documents[index].data["name"],
+                          style: TextStyle(fontSize: 14, color: Colors.white),
+                        ),
+                        Text(
+                          searchSnapshot.documents[index].data["email"],
+                          style: TextStyle(fontSize: 14, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        createChatroomAndStartConversation(
+                            searchSnapshot.documents[index].data["name"]);
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(30)),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 18),
+                          child: Text(
+                            "message",
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    )
+                  ],
+                ),
+              );
             })
         : Container();
   }
@@ -93,41 +145,49 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 }
 
-class SearchTile extends StatelessWidget {
-  final String userName;
-  final String userEmail;
-  SearchTile({this.userEmail, this.userName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                userName,
-                style: TextStyle(fontSize: 14, color: Colors.white),
-              ),
-              Text(
-                userEmail,
-                style: TextStyle(fontSize: 14, color: Colors.white),
-              ),
-            ],
-          ),
-          Spacer(),
-          Container(
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(30)),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-              child: Text(
-                "message",
-                style: TextStyle(color: Colors.white),
-              ))
-        ],
-      ),
-    );
+getChatRommId(String a, String b) {
+  if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+    return "$b\_$a";
+  } else {
+    return "$a\_$b";
   }
 }
+
+// class SearchTile extends StatelessWidget {
+//   final String userName;
+//   final String userEmail;
+//   SearchTile({this.userEmail, this.userName});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+//       child: Row(
+//         children: [
+//           Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text(
+//                 userName,
+//                 style: TextStyle(fontSize: 14, color: Colors.white),
+//               ),
+//               Text(
+//                 userEmail,
+//                 style: TextStyle(fontSize: 14, color: Colors.white),
+//               ),
+//             ],
+//           ),
+//           Spacer(),
+//           Container(
+//               decoration: BoxDecoration(
+//                   color: Colors.blue, borderRadius: BorderRadius.circular(30)),
+//               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+//               child: Text(
+//                 "message",
+//                 style: TextStyle(color: Colors.white),
+//               ))
+//         ],
+//       ),
+//     );
+//   }
+// }

@@ -13,6 +13,7 @@ class AuthMethods {
           email: email, password: password);
 
       FirebaseUser firebaseUser = result.user;
+      print(firebaseUser);
       return _userFromFirebaseUser(firebaseUser);
     } catch (e) {
       print(e.toString());

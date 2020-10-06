@@ -1,7 +1,7 @@
+import 'package:FP/helper/helperfunctions.dart';
 import 'package:FP/services/auth.dart';
 import 'package:FP/widgets/widget.dart';
 import 'package:flutter/material.dart';
-
 import 'chatRoomsScreen.dart';
 
 class SignIn extends StatefulWidget {
@@ -32,6 +32,8 @@ class _SignInState extends State<SignIn> {
               passwordTextEditingController.text)
           .then((value) {
         if (value != null) {
+          HelperFunctions.saveUserNameSharedPreference(
+              emailTextEditingController.text);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => ChatRoom()));
         } else {
@@ -55,31 +57,31 @@ class _SignInState extends State<SignIn> {
             )
           : SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height - 100,
-                alignment: Alignment.bottomCenter,
+                height: MediaQuery.of(context).size.height,
                 child: Container(
+                  alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(horizontal: 24),
                   child: Form(
                     key: formKey,
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                       TextFormField(
-                        validator: (val) {
-                          return val.contains("@gmail.com") &&
-                                  emailTextEditingController.text != null
-                              ? null
-                              : "enter valid email";
-                        },
-                        controller: emailTextEditingController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
+                          validator: (val) {
+                            return val.contains("@gmail.com") &&
+                                    emailTextEditingController.text != null
+                                ? null
+                                : "enter valid email";
+                          },
+                          controller: emailTextEditingController,
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
                             hintText: "email",
                             hintStyle: TextStyle(color: Colors.white54),
                             focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue)),
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
                             enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white))),
-                      ),
+                                borderSide: BorderSide(color: Colors.white)),
+                          )),
                       TextFormField(
                         validator: (val) {
                           return val.length >= 7

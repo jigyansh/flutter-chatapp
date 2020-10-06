@@ -1,5 +1,6 @@
 // import 'dart:js';
 
+import 'package:FP/helper/helperfunctions.dart';
 import 'package:FP/services/auth.dart';
 import 'package:FP/services/database.dart';
 import 'package:FP/widgets/widget.dart';
@@ -35,6 +36,12 @@ class _SignUpState extends State<SignUp> {
       };
       databaseMethods.uploadUserInfo(userInfoMap);
 
+      HelperFunctions.saveUserLoggedInSharedPreference(true);
+      HelperFunctions.saveUserEmailSharedPreference(
+          emailTextEditingController.text);
+      HelperFunctions.saveUserNameSharedPreference(
+          usernameTextEditingController.text);
+
       setState(() {
         isLoading = true;
       });
@@ -50,6 +57,12 @@ class _SignUpState extends State<SignUp> {
         setState(() {
           isLoading = false;
         });
+        // Scaffold.of(context).showSnackBar(SnackBar(
+        //     backgroundColor: Colors.yellowAccent,
+        //     content: Text(
+        //       'enter valid credentials',
+        //       style: TextStyle(color: Colors.black),
+        //     )));
       }
     });
   }
@@ -113,6 +126,7 @@ class _SignUpState extends State<SignUp> {
                                         BorderSide(color: Colors.white))),
                           ),
                           TextFormField(
+                            obscureText: true,
                             validator: (val) {
                               return val.length < 6
                                   ? "enter strong paswword"
