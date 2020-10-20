@@ -2,7 +2,7 @@ import 'package:FP/helper/helperfunctions.dart';
 import 'package:FP/services/auth.dart';
 import 'package:FP/widgets/widget.dart';
 import 'package:flutter/material.dart';
-import 'chatRoomsScreen.dart';
+// import 'chatRoomsScreen.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -34,8 +34,8 @@ class _SignInState extends State<SignIn> {
         if (value != null) {
           HelperFunctions.saveUserNameSharedPreference(
               emailTextEditingController.text);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+          // Navigator.pushReplacement(
+          //     context, MaterialPageRoute(builder: (context) => ChatRoom()));
         } else {
           setState(() {
             isLoading = false;
@@ -106,20 +106,17 @@ class _SignInState extends State<SignIn> {
                           authMethods
                               .resetPass(emailTextEditingController.text);
 
-                          if (formKey.currentState.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                                backgroundColor: Colors.yellowAccent,
-                                content: Text(
-                                  'changing your password',
-                                  style: TextStyle(color: Colors.black),
-                                )));
-                          } else {
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text('first email correctly')));
-                          }
+                          // if (formKey.currentState.validate()) {
+                          //   Scaffold.of(context).showSnackBar(SnackBar(
+                          //       backgroundColor: Colors.yellowAccent,
+                          //       content: Text(
+                          //         'changing your password',
+                          //         style: TextStyle(color: Colors.black),
+                          //       )));
+                          // } else {
+                          //   Scaffold.of(context).showSnackBar(SnackBar(
+                          //       content: Text('first email correctly')));
+                          // }
                         },
                         child: Container(
                           alignment: Alignment.centerRight,
@@ -144,20 +141,18 @@ class _SignInState extends State<SignIn> {
                           onTap: () {
                             signMeIn();
                           },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  const Color(0xff007EF4),
-                                  const Color(0XFF2A75BC)
-                                ]),
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Text(
-                              "Sign In",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
+                          // child: Container(
+                          //   alignment: Alignment.center,
+                          //   width: MediaQuery.of(context).size.width,
+                          //   decoration: BoxDecoration(
+                          //       gradient: LinearGradient(colors: [
+                          //         const Color(0xff007EF4),
+                          //         const Color(0XFF2A75BC)
+                          //       ]),
+                          //       borderRadius: BorderRadius.circular(30)),
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
