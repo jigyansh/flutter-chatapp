@@ -1,5 +1,5 @@
-import 'package:FP/helper/constants.dart';
-import 'package:FP/helper/helperfunctions.dart';
+// import 'package:FP/helper/constants.dart';
+// import 'package:FP/helper/helperfunctions.dart';
 import 'package:FP/services/auth.dart';
 import 'package:FP/helper/authenticate.dart';
 import 'package:FP/views/search.dart';
@@ -15,14 +15,14 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   void initState() {
     // TOD
-    getUserInfo();
+    // getUserInfo();
     super.initState();
   }
 
-  getUserInfo() async {
-    Constants.myName = await HelperFunctions.getUserNameSharedPreference();
-    setState(() {});
-  }
+  // getUserInfo() async {
+  //   Constants.myName = await HelperFunctions.getUserNameSharedPreference();
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {

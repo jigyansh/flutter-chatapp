@@ -1,12 +1,11 @@
-// import 'dart:js';
-
-import 'package:FP/helper/helperfunctions.dart';
+// import 'package:FP/helper/helperfunctions.dart';
 import 'package:FP/services/auth.dart';
 import 'package:FP/services/database.dart';
 import 'package:FP/widgets/widget.dart';
 import 'package:flutter/material.dart';
 
 import 'chatRoomsScreen.dart';
+import 'dart:ui';
 
 class SignUp extends StatefulWidget {
   final Function toggle;
@@ -36,11 +35,11 @@ class _SignUpState extends State<SignUp> {
       };
       databaseMethods.uploadUserInfo(userInfoMap);
 
-      HelperFunctions.saveUserLoggedInSharedPreference(true);
-      HelperFunctions.saveUserEmailSharedPreference(
-          emailTextEditingController.text);
-      HelperFunctions.saveUserNameSharedPreference(
-          usernameTextEditingController.text);
+      // HelperFunctions.saveUserLoggedInSharedPreference(true);
+      // HelperFunctions.saveUserEmailSharedPreference(
+      //     emailTextEditingController.text);
+      // HelperFunctions.saveUserNameSharedPreference(
+      //     usernameTextEditingController.text);
 
       setState(() {
         isLoading = true;
@@ -57,12 +56,6 @@ class _SignUpState extends State<SignUp> {
         setState(() {
           isLoading = false;
         });
-        // Scaffold.of(context).showSnackBar(SnackBar(
-        //     backgroundColor: Colors.yellowAccent,
-        //     content: Text(
-        //       'enter valid credentials',
-        //       style: TextStyle(color: Colors.black),
-        //     )));
       }
     });
   }
@@ -147,14 +140,6 @@ class _SignUpState extends State<SignUp> {
                         ],
                       ),
                     ),
-                    // SizedBox(height: 20),
-                    // Container(
-                    //   alignment: Alignment.centerRight,
-                    //   child: Text(
-                    //     "Forgot Password?",
-                    //     style: TextStyle(color: Colors.white),
-                    //   ),
-                    // ),
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
